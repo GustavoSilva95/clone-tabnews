@@ -19,7 +19,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@next/swc-darwin-arm64": "^16.1.6",
     "dotenv": "^16.4.4",
     "dotenv-expand": "^11.0.6",
     "next": "^13.1.6",
