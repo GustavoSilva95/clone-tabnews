@@ -17,11 +17,47 @@ export class InternalServerError extends Error {
 }
 
 export class ServiceError extends Error {
-  constructor({ cause }, message) {
+  constructor({ cause, message }) {
     super(message || "Serviço indisponível no momento.", { cause });
     this.name = "ServiceError";
     this.action = "Verifique se o serviço está disponível.";
     this.statusCode = 503;
+  }
+
+  toJSON() {
+    return {
+      name: this.name,
+      message: this.message,
+      action: this.action,
+      statusCode: this.statusCode,
+    };
+  }
+}
+
+export class NotFoundError extends Error {
+  constructor({ cause, message, action }) {
+    super(message || "Recurso não encontrado.", { cause });
+    this.name = "NotFoundError";
+    this.action = action || "Verifique se o recurso solicitado existe.";
+    this.statusCode = 404;
+  }
+
+  toJSON() {
+    return {
+      name: this.name,
+      message: this.message,
+      action: this.action,
+      statusCode: this.statusCode,
+    };
+  }
+}
+
+export class ValidationError extends Error {
+  constructor({ cause, message, action }) {
+    super(message || "Um erro de validação ocorreu", { cause });
+    this.name = "ValidationError";
+    this.action = action || "Verifique os dados enviados e tente novamente.";
+    this.statusCode = 400;
   }
 
   toJSON() {
